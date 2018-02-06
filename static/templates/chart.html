@@ -1,0 +1,36 @@
+{% extends "master.html" %}
+
+{% block header %}
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+	<script type= "text/javascript" src="https://www.google.com/jsapi"></script>
+
+	<script	type= "text/javascript">
+	google.load("visualization","1",{packages:["corechart"]});
+	google.setOnLoadCallback(drawChart);
+	function drawChart(){
+		var data= google.visualization.arrayToDataTable([
+			['Tareas','Horas por dia'],
+			['Trabajo',8],
+			['Comer',4],
+			['Mirar Tv',2],
+			['Cambiarse',2],
+			['Dormir',8],
+			]);
+		var options= {
+			title: "Mis Actividades Diarias"
+		};
+		var chart= new google.visualization.PieChart(document.getElementById('piechart'));
+		chart.draw(data,options);
+	}
+	</script>
+{% endblock %}
+
+{% block content %}
+<h2>Cuadros Estadísticos con Google Chart</h2>
+<section id= "piechart"></section>
+<section></section>
+{% endblock %}
+
+{% block footer %}
+<h6>by @hpguarnizo </h6>
+{% endblock %}

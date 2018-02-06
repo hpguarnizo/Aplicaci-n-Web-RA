@@ -1,0 +1,147 @@
+{% extends "master.html" %}
+{% load staticfiles %}
+{% block content %}
+{% for empresas in empresa %}
+   
+    
+    <section id="about-us" class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <h2>{{empresas.nombre}}</h2>
+                <p style="text-align:justify;">{{empresas.descripcion}}</p>
+                <h5>Enlaces: <small class="designation muted"><p>{{empresas.email}}</p></h5>
+            <hr>
+            <!--Datos del Museo-->
+                <div id="meet-the-team" class="row">
+                    <div class="col-md-6 col-xs-9">
+                        <div class="center">
+                            <h5>Dirección<small class="designation muted"><p style="text-align:justify;">{{empresas.direccion}}</p></small></h5>
+                        </div>
+                    </div>       
+                    <div class="col-md-3 col-xs-6">
+                        <div class="center">
+                            <h5>Tipo<small class="designation muted"><p style="text-align:center;">{{empresas.tipo}}</p></small></h5>
+                        </div>
+                    </div>        
+                    <div class="col-md-3 col-xs-6">
+                        <div class="center">
+                            <h5>Teléfono<small class="designation muted"><p style="text-align:center;">{{empresas.telefono}}</p></small></h5>
+                        </div>
+                    </div>
+                </div><!--/#meet-the-team-->
+            </div><!--/.col-sm-6-->
+
+            <!--Datos del Museo-->
+            <div class="col-sm-6">
+                <section id="main-slider" class="no-margin">
+                    <form role="form" action="/empresas_detalle/" method="get">
+                        <div class="input-group">
+                            <select name="id" id="id" required="requires" class="form-control">
+                            <option value="{{empresas.id_empresa}}" selected="selected">{{empresas.nombre}}</option>
+                            {% for all_empresas in all_empresa %}
+                                <option value="{{all_empresas.id_empresa}}">{{all_empresas.nombre}}</option>
+                            {% endfor %}
+                            </select>
+                            <span class="input-group-btn">
+                                <button class="btn btn-info btn-sm" type="submit">Buscar</button>
+                            </span>
+                        </div>
+                    </form>
+                    <div class="carousel slide wet-asphalt">
+                        <ol class="carousel-indicators">
+                            <li data-target="#main-slider" data-slide-to="0" class="active"></li>
+                        </ol>
+                        <div class="carousel-inner" style="height:400px;">
+                            <div class="item active" style="background-image: url({{STATIC_URL}}template/imagenes/{{empresas.id_empresa}}/{{empresas.imagen}}); style='height:100px;'">
+                            </div><!--/.item-->                        
+                        </div><!--/.carousel-inner-->
+                    </div><!--/.carousel-->
+                    <a class="prev hidden-xs" href="#main-slider" data-slide="prev">
+                        <i class="icon-angle-left"></i>
+                    </a>
+                    <a class="next hidden-xs" href="#main-slider" data-slide="next">
+                        <i class="icon-angle-right"></i>
+                    </a>
+                </section>
+            </div><!--/.col-sm-6-->          
+        </div><!--/.row-->
+
+        <!--<p class="lead center">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p> -->
+        <div class="gap"></div>
+
+        <div id="meet-the-team" class="row">
+            <div class="col-md-3 col-xs-6">
+                <div class="center">
+                    
+                </div>
+            </div>
+
+            <div class="col-md-3 col-xs-6">
+                <div class="center">
+                    <div class="center">
+                        
+                    </div>
+                </div>
+            </div>        
+            <div class="col-md-3 col-xs-6">
+                <div class="center">
+                    <div class="center">
+                    
+                </div>
+                </div>
+            </div>        
+            <div class="col-md-3 col-xs-6">
+                <div class="center">
+                    <div class="center">
+                    
+                </div>
+                </div>
+            </div>
+        </div><!--/#meet-the-team-->
+    </section><!--/#about-us-->
+    <section id="bottom" class="wet-asphalt">
+
+        <div class="container">
+            MAPA
+            <section id="map-canvas">Cargando el mapa...</section>
+        </div>
+    </section><!--/#bottom-->
+    {% block script %}
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+    <script >
+        function initialize() {
+            var myLatlng = new google.maps.LatLng({{empresas.latitud}}, {{empresas.longitud}});
+            var mapOptions = {
+            zoom: 16,
+            center: myLatlng,
+            styles: [{"stylers":[
+                   {"hue":"#0083FF"},
+                   {"invert_lightness":true},
+                   {"saturation":-130},
+                   {"lightness":50},
+                   {"gamma":0.3}]},
+                   {"featureType":"water","elementType":"geometry","stylers":[{"color":"#364358"}]}
+                ]
+            }
+        var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+            var marcador = new google.maps.LatLng({{empresas.latitud}}, {{empresas.longitud}});
+            //var marcador = new google.maps.LatLng(-3.984135, -79.200053);
+            var marker = new google.maps.Marker({
+                position: marcador,
+                map: map,
+                //title: 'hola2'
+                title: '{{empresas.nombre}}'
+            });
+            google.maps.event.addListener(marker, 'click', function(){
+                var popup = new google.maps.InfoWindow();
+                var note = '{{empresas.nombre}}';
+                //var note = 'hola';
+                popup.setContent(note);
+                popup.open(map, this);
+            })
+        }
+    google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
+    {% endblock %}
+    {% endfor %}
+{%endblock%}

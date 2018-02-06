@@ -1,0 +1,90 @@
+{% extends 'masterInicio.html' %}
+{% block content %}
+
+{% endblock %}
+{% block head %}
+<!-- Header Carousel -->
+<div>
+        
+    <p>
+    </p>
+    <p>
+    </p>
+    <p>
+    </p>
+
+
+    </div>
+    
+
+{% endblock %}
+{% block body %}
+
+<!-- Page Content -->
+    <div class="container">
+
+        <!-- Marketing Icons Section -->
+        <div class="col-md-4" align="center">
+                <div class="panel panel-default">
+                  <div class="span2"></div>
+                  <div class="span8 registrar">
+                    <legend align="center">Entrar</legend>
+                    {% if user.is_authenticated %}
+                      Bienvenidooo {{user.username|capfirst}}
+                      <a href="/cerrar/">Salir</a>
+                    {% else %}
+                    <form class="form-horizontal alinear" method="POST">{% csrf_token %}
+                      <div class="control-group">
+                        <label class="control-label" for="inputEmail" >Usuario</label>
+                        <div class="controls">
+                          <input name="username" type="text" id="inputEmail" placeholder="Usuario">
+                        </div>
+                      </div>
+
+                      <div class="control-group">
+                        <label class="control-label" for="inputPassword">Contraseña</label>
+                        <div class="controls">
+                          <input name="password" type="password" id="inputPassword" placeholder="Contraseña">
+                        </div>
+                      </div>
+
+                      <div class="control-group">
+                        <div class="controls">
+                          <label class="checkbox">
+                          <input type="checkbox">Recordar</label>
+                          <button type="submit" class="btn btn-info">Ingresar</button>
+                          <a href="/registrarse/" class="reg">Registrarse</a>
+                        </div>
+                      </div>
+                    </form>
+                    {% endif %}  
+                  </div>  
+                  <div class="span2"></div>
+                </div>
+            </div>
+
+
+        <!-- /.row -->
+<!-- Portfolio Section -->
+        <div class="row">
+            
+            
+        </div>
+        <!-- /.row -->
+        <!-- Features Section -->
+        
+        <!-- Call to Action Section -->
+        <div class="well">
+            <div class="row">
+                <div class="col-md-8">
+                    <p style = "text-align:right;"> Quieres conocer sobre nuestra Universidad</p>
+                </div>
+                <div class="col-md-4">
+                    <a class="btn btn-lg btn-default btn-block" href="http://www.utpl.edu.ec/">Click Aqui...</a>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+
+{% endblock %}

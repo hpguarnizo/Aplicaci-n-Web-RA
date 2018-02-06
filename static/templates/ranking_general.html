@@ -1,0 +1,49 @@
+{% extends "master.html" %}
+
+{% block header %}
+<meta charset="utf-8">
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript">
+google.load("visualization", '1', {packages:['corechart']});
+google.setOnLoadCallback(drawChart);
+
+
+function drawChart() {
+  var query = new google.visualization.Query(
+
+
+      'https://docs.google.com/spreadsheets/d/1stfPohEiwuUJnM58ybOhpFLIl8aKGwqflCLf8tLhd9g/edit?usp=sharing&sheet=Sheet2&range=B1:D20');
+
+  query.send(handleQueryResponse);
+}
+
+function handleQueryResponse(response) {
+  if (response.isError()) {
+    alert('Error in query: ' + response.getMessage() + ' ' + response.getDetailedMessage());
+    return;
+  }
+
+  var data = response.getDataTable();
+
+  var options = {
+          title: 'Ranking General Empresas mas grandes del País',
+          is3D: false, 
+        };
+
+  var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+ // chart.draw(data, { legend: { position: 'none' } });
+ chart.draw(data, options);
+
+  var chart = new google.visualization.BarChart(document.getElementById('barchart'));
+ // chart.draw(data, { legend: { position: 'none' } });
+ chart.draw(data, options);
+}	
+
+</script>
+{% endblock %}
+
+{% block content %}
+<section id= "piechart"></section>
+<section id= "barchart"></section>
+
+{% endblock %}

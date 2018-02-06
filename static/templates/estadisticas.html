@@ -1,0 +1,31 @@
+{% extends "master.html" %}
+
+{% block header %}
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+	<script type= "text/javascript" src="https://www.google.com/jsapi"></script>
+
+	<script	type= "text/javascript">
+	google.load("visualization","1",{packages:["corechart"]});
+	google.setOnLoadCallback(drawChart);
+	function drawChart(){
+		var data= google.visualization.arrayToDataTable([
+			['Genero','Cantidad'],
+			['Masculino',{{m}}],
+			['Femenino',{{f}}],
+			]);
+		var options= {
+			title: "Administradores por Genero"
+		};
+		var chart= new google.visualization.PieChart(document.getElementById('piechart'));
+		chart.draw(data,options);
+		var chart= new google.visualization.BarChart(document.getElementById('barchart'));
+		chart.draw(data,options);
+	}
+	</script>
+{% endblock %}
+
+{% block content %}
+<section id= "piechart"></section>
+<section id= "barchart"></section>
+
+{% endblock %}
