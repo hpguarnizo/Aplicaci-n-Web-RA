@@ -10,5 +10,5 @@ urlpatterns = patterns('',
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', include('apps.portal.urls')),
-    url(r'^logueado', include('apps.portal.urls')),
+#    url(r'^logueado', include('apps.portal.urls')),
 )
