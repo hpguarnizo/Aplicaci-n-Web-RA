@@ -15,6 +15,7 @@ class Recurso(models.Model):
 	descripcion= models.TextField()
 	tipo_recurso= models.CharField(max_length=50, choices= TIPO_RECURSOS_CHOICES, default="")
 	id_asignatura= models.ForeignKey('Asignatura', db_column='id_asignatura', default="")
+	archivo_recurso = models.FileField(upload_to='static/')
 	def __str__(self):
 		return self.nombre
 
