@@ -10,12 +10,12 @@ TIPO_RECURSOS_CHOICES=(
 )
 
 class Recurso(models.Model):
-	id_recurso= models.AutoField(primary_key=True, default="")
+	id_recurso= models.AutoField(primary_key=True)
 	nombre= models.CharField(max_length=255)
 	descripcion= models.TextField()
-	tipo_recurso= models.CharField(max_length=50, choices= TIPO_RECURSOS_CHOICES, default="")
+	tipo_recurso= models.CharField(max_length=30, choices= TIPO_RECURSOS_CHOICES, default="")
 	id_asignatura= models.ForeignKey('Asignatura', db_column='id_asignatura', default="")
-	archivo_recurso = models.FileField(upload_to='static/')
+	archivo_recurso = models.FileField(upload_to='recursos/')
 	def __str__(self):
 		return self.nombre
 

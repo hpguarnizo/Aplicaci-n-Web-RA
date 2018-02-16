@@ -25,7 +25,10 @@ DEBUG = True
 TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
+MEDIA_URL = 'media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 
 
 # Application definition
@@ -87,7 +90,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = '/static/'
-MEDIA_ROOT = '/static'
 
 #template location
 TEMPLATE_DIRS = (os.path.join(BASE_DIR,'static/templates/'), ) #indica donde esta la ruta de los templates
