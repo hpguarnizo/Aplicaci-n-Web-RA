@@ -16,5 +16,7 @@ urlpatterns = patterns('',
     url(r'^carrera_detalle/', 'apps.portal.views.carrera_detalle', name='carrera_detalle'),
     url(r'^usuarios_detalle/', 'apps.portal.views.usuarios_detalle', name='usuarios_detalle'),
     url(r'^recursos_detalle/', 'apps.portal.views.recurso_detalle', name='recurso_detalle'),
+    url(r'^contactos/', 'apps.portal.views.contactos', name='contacto'),
+    url(r'^quienes_somos/', 'apps.portal.views.quienes_somos', name='quienes_somos'),
 #    url(r'^logueado', include('apps.portal.urls')),
 )

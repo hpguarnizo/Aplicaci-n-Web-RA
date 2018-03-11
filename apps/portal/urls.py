@@ -7,5 +7,6 @@ urlpatterns = [
 	url(r'^carrera_detalle/', 'apps.portal.views.carrera_detalle', name='carrera_detalle'),
 	url(r'^recursos_detalle/', 'apps.portal.views.recurso_detalle', name='recurso_detalle'),
 	url(r'^usuarios_detalle/', 'apps.portal.views.usuarios_detalle', name='usuario_detalle'),
-	
+	url(r'^contactos/', 'apps.portal.views.contactos', name='contactos'),
+		
 ]

@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from apps.portal.models import *
-from .models import Asignatura
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -28,3 +27,28 @@ def usuarios_detalle(request):
 def recurso_detalle(request):
 	recursos = Recurso.objects.all()
 	return render(request,'recursos_detalle.html', {'recursos':recursos})
+
+def contactos(request):
+	return render(request,'contactos.html')
+
+def quienes_somos(request):
+	return render(request,'quienes_somos.html')
+
+def generarQR (request):
+
+	id_recurso = request.GET.get('id')
+	recurso = Recurso.objects.filter(id_recurso=id_recurso)
+	print (id_recurso)
+	qr = qrcode.QRCode(
+		error_correction=qrcode.constants.ERROR_CORRECT_H,
+		version=1,
+		box_size=10,
+		border=4,
+	)
+	qr.add_data('http://www.ks7000.net.ve')
+	qr.make(fit=True) 
+	imagen = qr.make_image()
+	imagen.save('ks7000_url_qr.png', 'png')
+
+	img = qr.make_image()
+	return render(request, 'empresas_detalle.html', {'empresa':empresa, 'all_empresa':all_empresa})
