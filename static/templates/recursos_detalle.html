@@ -23,6 +23,18 @@
 <script type="text/javascript" src="{% static 'templates/js/jquery-1.11.1.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'templates/js/jquery.dataTables.min.js' %}"></script>
 
+<script type="text/javascript" src="static/templates/js/qrjs/qrcode.js"></script>
+    <!-- SJIS Support (optional) -->
+<script type="text/javascript" src="static/templates/js/qrjs/qrcode_SJIS.js"></script>
+<!--
+    <script type="text/javascript" src="qrcode_SJIS.js"></script>
+-->
+    <!-- Uncomment to encode string in qrcode as UTF8 (optional) -->
+<!--
+    <script type="text/javascript" src="qrcode_UTF8.js"></script>
+-->
+<script type="text/javascript" src="static/templates/js/qrjs/sample.js"></script>
+
 
 <script>
     $(document).ready(function() {
@@ -31,6 +43,7 @@
 </script>
 
 <h2>Lista de Recursos </h2>
+
 <table id="example" class="display" cellspacing="0" width="90%" style="margin: 0 auto;" >
         <thead>
             <tr>
@@ -59,10 +72,14 @@
             <td>{{i.descripcion}}</td>
             <td>{{i.tipo_recurso}}</td>
             <td>{{i.archivo_recurso}}</td>            
-            <td><a {{apps.portal.views.generarQR}}">Generar QR Code</a></td>
+            <td>
+                <input type="button" onclick="update_qrcode()" value="Generar QR">
+            </td>
             </tr>
 {%endfor%}
 
         </tbody>
+
+
 </table>
 {% endblock %}
